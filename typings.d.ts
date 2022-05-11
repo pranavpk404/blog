@@ -8,7 +8,7 @@ export interface Post {
     name: string;
     image: string;
   };
-  body: string;
+
   mainImage: {
     asset: {
       _ref: string;
