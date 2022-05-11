@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { cardProps } from "../typings";
+import { CardProps } from "../typings";
 
 const Card = ({
   linkToPost,
@@ -9,19 +9,19 @@ const Card = ({
   postTitle,
   authorName,
   authorImage,
-}: cardProps) => {
+}: CardProps) => {
   return (
-    <div className="group border rounded-lg overflow-hidden">
+    <div className="hover:scale-105 transition-all border rounded-lg overflow-hidden">
       <Link href={linkToPost}>
         <a>
-          <Image
-            className="h-60 w-full object-cover group-hover:scale-110 transition-all"
+          <img
+            className=" mx-auto object-cover w-full"
             src={mainImage}
             alt={postTitle}
             width={250}
             height={250}
           />
-          <div className="flex p-5 min-h-56 justify-between ">
+          <div className="flex p-5  justify-between ">
             <div>
               <h3 className="font-bold">{postTitle}</h3>
               <p className="text-sm">

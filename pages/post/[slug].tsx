@@ -3,11 +3,15 @@ import { sanityClient, urlFor } from "../../sanity";
 import { Post } from "../../typings";
 import Image from "next/image";
 import PortableText from "react-portable-text";
+import CommentForm from "../../components/CommentForm";
+import Comments from "../../components/Comments";
+
 interface Props {
   post: Post;
 }
 
 const Post = ({ post }: Props) => {
+  const { title, mainImage, author, _createdAt, comments, _id } = post;
   return (
     <div>
       <Image
@@ -15,21 +19,21 @@ const Post = ({ post }: Props) => {
         height={100}
         className="w-full h-40 object-cover"
         alt={post.title}
-        src={urlFor(post.mainImage.asset._ref).url()!}
+        src={urlFor(mainImage.asset._ref).url()!}
       />
       <article className="max-w-3xl mx-auto p-5">
-        <h1 className="text-3xl mb-3 ">{post.title}</h1>
+        <h1 className="text-3xl mb-3 ">{title}</h1>
         <div className="flex items-center mt-2 space-x-5">
           <Image
             width="48"
             height="48"
             className="rounded-full"
-            src={urlFor(post.author.image).url()!}
-            alt={post.author.name}
+            src={urlFor(author.image).url()!}
+            alt={author.name}
           />
           <p className="font-extralight text-sm">
-            Blog Post by {post.author.name} - Published at{" "}
-            {new Date(post._createdAt).toLocaleString()}
+            Blog Post by {author.name} - Published at{" "}
+            {new Date(_createdAt).toLocaleString()}
           </p>
         </div>
         <div>
@@ -57,6 +61,9 @@ const Post = ({ post }: Props) => {
           />
         </div>
       </article>
+      <hr className=" max-w-lg my-5 mx-auto border border-yellow-500" />
+      <CommentForm id={_id} />
+      <Comments comments={comments} />
     </div>
   );
 };
@@ -94,6 +101,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
             name,
             image
         },
+'comments': *[
+          _type == "comment" &&
+          post._ref == ^._id &&
+          approved == true
+        ],
         description,
         mainImage,
         slug,
