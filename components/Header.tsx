@@ -8,7 +8,7 @@ const Header = () => {
         <ul className="flex justify-between space-x-5">
           <li className="flex items-center ">
             <Link href="/">
-              <Image alt="logo" src="/logo.png" width="150" height="40" />
+              <img alt="logo" src="/logo.png" width="150" height="40" />
             </Link>
             <div className="hidden md:flex mx-5 items-center space-x-5">
               <Link href="/about">
