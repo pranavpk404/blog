@@ -15,15 +15,15 @@ const Post = ({ post }: Props) => {
   return (
     <div>
       <Image
-        width={1200}
-        height={100}
-        className="w-full h-40 object-cover"
+        width={1500}
+        height={500}
         alt={post.title}
         src={urlFor(mainImage.asset._ref).url()!}
       />
+
       <article className="max-w-3xl mx-auto p-5">
         <h1 className="text-3xl mb-3 ">{title}</h1>
-        <div className="flex items-center mt-2 space-x-5">
+        <div className="flex items-center mt-2 space-x-5 mb-5">
           <Image
             width="48"
             height="48"
@@ -41,18 +41,32 @@ const Post = ({ post }: Props) => {
             className=""
             serializers={{
               h1: (props: any) => (
-                <h1 className="text-3xl mb-3">{props.children}</h1>
+                <h1 className="text-5xl mb-3">{props.children}</h1>
               ),
               h2: (props: any) => (
-                <h2 className="text-2xl mb-3">{props.children}</h2>
+                <h2 className="text-4xl mb-3">{props.children}</h2>
               ),
+              h3: (props: any) => (
+                <h3 className="text-3xl mb-3">{props.children}</h3>
+              ),
+              h4: (props: any) => (
+                <h4 className="text-2xl mb-3">{props.children}</h4>
+              ),
+
               link: (props: any) => (
                 <a className="text-base mb-3" href={props.href}>
                   {props.children}
                 </a>
               ),
-              li: ({ props }: any) => (
-                <li className="text-base mb-3">{props.children}</li>
+              a: (props: any) => (
+                <a className="mb-3 text-3xl" href={props.href}>
+                  {props.children}
+                </a>
+              ),
+              ul: (props: any) => <ul className="mt-xl">{props.children}</ul>,
+              ol: (props: any) => <ol className="mt-xl">{props.children}</ol>,
+              li: (props: any) => (
+                <li className="text-base mb-3 list-disc">{props.children}</li>
               ),
             }}
             content={post.body}
