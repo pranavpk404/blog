@@ -92,7 +92,7 @@ const CommentForm = ({ id }: any) => {
                       Comment
                     </label>
                     <textarea
-                      {...register("comment")}
+                      {...(register("comment"), { required: true })}
                       id="comment"
                       name="comment"
                       typeof="text"
