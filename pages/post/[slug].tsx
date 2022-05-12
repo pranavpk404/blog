@@ -117,7 +117,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         },
 'comments': *[
           _type == "comment" &&
-          post._ref == ^._id 
+          post._ref == ^._id &&
+          approved == true
         ],
         description,
         mainImage,
@@ -129,6 +130,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       post,
     },
-    revalidate: 10,
+    revalidate: 3600,
   };
 };
