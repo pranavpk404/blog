@@ -1,8 +1,8 @@
+import Image from "next/image";
 import { GetStaticProps } from "next/types";
+import PortableText from "react-portable-text";
 import { sanityClient, urlFor } from "../../sanity";
 import { Post } from "../../typings";
-import Image from "next/image";
-import PortableText from "react-portable-text";
 import CommentForm from "../../components/CommentForm";
 import Comments from "../../components/Comments";
 
@@ -76,7 +76,7 @@ const Post = ({ post }: Props) => {
         </div>
       </article>
       <hr className=" max-w-lg my-5 mx-auto border border-yellow-500" />
-      <CommentForm id={_id} />
+      <CommentForm blogId={_id} />
       <Comments comments={comments} />
     </div>
   );
@@ -85,14 +85,7 @@ const Post = ({ post }: Props) => {
 export default Post;
 
 export const getStaticPaths = async () => {
-  const query = `
-  *[_type == "post"]{
-      _id,
-      slug {
-          current
-        }   
-    }`;
-
+  const query = `*[_type == "post"]{_id,slug {current}}`;
   const posts = await sanityClient.fetch(query);
   const paths = posts.map((post: Post) => ({
     params: {
@@ -106,25 +99,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const url = `
-    *[_type == "post" && slug.current == "${params?.slug}"][0]{
-        _id,
-        _createdAt,
-        title,
-        author->{
-            name,
-            image
-        },
-'comments': *[
-          _type == "comment" &&
-          post._ref == ^._id &&
-          approved == true
-        ],
-        description,
-        mainImage,
-        slug,
-        body
-      }`;
+  const url = `*[_type == "post" && slug.current == "${params?.slug}"][0]{_id,_createdAt,title,author->{name, image},'comments': *[_type == "comment" && post._ref == ^._id && approved == true], description, mainImage, slug, body}`;
   const post = await sanityClient.fetch(url);
   return {
     props: {

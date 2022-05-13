@@ -14,25 +14,29 @@ const Card = ({
     <div className="hover:scale-105 transition-all border rounded-lg overflow-hidden">
       <Link href={linkToPost}>
         <a>
-          <img
-            className=" mx-auto object-cover w-full"
+          <Image
+            className="mx-auto object-cover w-full"
             src={mainImage}
             alt={postTitle}
-            width={250}
-            height={250}
+            width={418}
+            height={140}
           />
-          <div className="flex p-5  justify-between ">
+          <div className="flex p-5 justify-between">
             <div>
               <h3 className="font-bold">{postTitle}</h3>
               <p className="text-sm">
                 {description} by {authorName}
               </p>
             </div>
-            <img
-              className="rounded-full w-12 h-12"
-              src={authorImage}
-              alt={authorName}
-            />
+            <span className="h-14 w-14 rounded-full">
+              <Image
+                width={56}
+                height={56}
+                className="rounded-full"
+                src={authorImage}
+                alt={authorName}
+              />
+            </span>
           </div>
         </a>
       </Link>

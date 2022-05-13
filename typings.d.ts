@@ -20,11 +20,17 @@ export interface Post {
   body: object[];
 }
 
+export interface Comments {
+  comments: Comment[];
+}
+
 export interface Comment {
   approved: boolean;
   comment: string;
+  email: string;
   name: string;
   _id: string;
+  _updatedAt: Date;
 }
 
 export interface CardProps {

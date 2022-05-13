@@ -1,8 +1,10 @@
-import { useForm, SubmitHandler } from "react-hook-form";
-import { FormInput } from "../typings";
 import { useState } from "react";
-const CommentForm = ({ id }: any) => {
+import { FormInput } from "../typings";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+const CommentForm = ({ blogId }: any) => {
   const [submitted, setSubmitted] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -33,7 +35,7 @@ const CommentForm = ({ id }: any) => {
         </div>
       ) : (
         <section className="text-gray-600 body-font relative">
-          <input {...register("_id")} type="hidden" name="_id" value={id} />
+          <input {...register("_id")} type="hidden" name="_id" value={blogId} />
           <div className="container px-5 py-12 mx-auto">
             <div className="flex flex-col text-center w-full mb-12">
               <h1 className="sm:text-3xl text-2xl font-bold title-font mb-4 text-gray-900">
