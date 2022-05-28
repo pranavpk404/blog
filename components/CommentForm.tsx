@@ -12,16 +12,12 @@ const CommentForm = ({ blogId }: any) => {
   } = useForm<FormInput>();
 
   const onSubmit: SubmitHandler<FormInput> = (data) => {
-    // log the comment to the console
-
-    console.log(data);
-
     fetch("/api/createcomments", {
       method: "POST",
       body: JSON.stringify(data),
     })
       .then(() => {
-        setSubmitted(false);
+        setSubmitted(true);
       })
       .catch((err) => {
         setSubmitted(false);
