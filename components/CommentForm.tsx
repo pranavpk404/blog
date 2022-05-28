@@ -12,12 +12,16 @@ const CommentForm = ({ blogId }: any) => {
   } = useForm<FormInput>();
 
   const onSubmit: SubmitHandler<FormInput> = (data) => {
+    // log the comment to the console
+
+    console.log(data);
+
     fetch("/api/createcomments", {
       method: "POST",
       body: JSON.stringify(data),
     })
       .then(() => {
-        setSubmitted(true);
+        setSubmitted(false);
       })
       .catch((err) => {
         setSubmitted(false);
@@ -94,7 +98,7 @@ const CommentForm = ({ blogId }: any) => {
                       Comment
                     </label>
                     <textarea
-                      {...(register("comment"), { required: true })}
+                      {...register("comment", { required: true })}
                       id="comment"
                       name="comment"
                       typeof="text"
