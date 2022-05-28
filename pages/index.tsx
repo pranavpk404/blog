@@ -2,10 +2,11 @@ import Head from "next/head";
 import { sanityClient, urlFor } from "../sanity";
 import { Post } from "../typings";
 import Card from "../components/Card";
+import { GetStaticProps } from "next/types";
 
-interface Props {
+type Props = {
   posts: [Post];
-}
+};
 
 const Home = ({ posts }: Props) => {
   return (
@@ -15,13 +16,13 @@ const Home = ({ posts }: Props) => {
         <meta name="description" content="Blog By Pranav" />
         <link rel="icon" href="/logo.png" />
       </Head>
-      <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 p-2 md:p-6 ">
+      <main className="flex justify-evenly flex-col sm:flex-row">
         {posts.map((post) => (
           <Card
             key={post._id}
             linkToPost={`/post/${post.slug.current}`}
             description={post.description}
-            mainImage={urlFor(post.mainImage.asset._ref).url()!}
+            thumbnail={urlFor(post.thumbnail.asset._ref).url()!}
             postTitle={post.title}
             authorName={post.author.name}
             authorImage={urlFor(post.author.image).url()!}
@@ -34,10 +35,13 @@ const Home = ({ posts }: Props) => {
 
 export default Home;
 
-export const getServerSideProps = async () => {
-  const url = `*[_type == "post"]{_id,title,description,author->{name,image},body,mainImage,slug}`;
+export const getStaticProps: GetStaticProps = async () => {
+  const url = `*[_type == "post"]{_id,title,description,author->{name,image},body,thumbnail,slug}`;
   const posts = await sanityClient.fetch(url);
   return {
-    props: { posts },
+    props: {
+      posts,
+    },
+    revalidate: 1800,
   };
 };

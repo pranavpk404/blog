@@ -1,14 +1,14 @@
 import Image from "next/image";
-import { GetStaticProps } from "next/types";
 import PortableText from "react-portable-text";
 import { sanityClient, urlFor } from "../../sanity";
 import { Post } from "../../typings";
 import CommentForm from "../../components/CommentForm";
 import Comments from "../../components/Comments";
+import { GetStaticProps } from "next/types";
 
-interface Props {
+type Props = {
   post: Post;
-}
+};
 
 const Post = ({ post }: Props) => {
   const { title, mainImage, author, _createdAt, comments, _id } = post;
@@ -18,7 +18,7 @@ const Post = ({ post }: Props) => {
         width={1500}
         height={500}
         alt={post.title}
-        src={urlFor(mainImage.asset._ref).url()!}
+        src={urlFor(mainImage.asset._ref).url()}
       />
 
       <article className="max-w-3xl mx-auto p-5">
@@ -105,6 +105,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       post,
     },
-    revalidate: 3600,
+    revalidate: 1800,
   };
 };

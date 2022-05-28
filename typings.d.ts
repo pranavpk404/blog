@@ -1,4 +1,4 @@
-export interface Post {
+export type Post = {
   _id: string;
   _createdAt: Date;
   title: string;
@@ -9,6 +9,11 @@ export interface Post {
     image: string;
   };
 
+  thumbnail: {
+    asset: {
+      _ref: string;
+    };
+  };
   mainImage: {
     asset: {
       _ref: string;
@@ -18,33 +23,33 @@ export interface Post {
     current: string;
   };
   body: object[];
-}
+};
 
-export interface Comments {
+export type Comments = {
   comments: Comment[];
-}
+};
 
-export interface Comment {
+export type Comment = {
   approved: boolean;
   comment: string;
   email: string;
   name: string;
   _id: string;
   _updatedAt: Date;
-}
+};
 
-export interface CardProps {
+export type CardProps = {
   linkToPost: string;
   description: string;
-  mainImage: string;
+  thumbnail: string;
   postTitle: string;
   authorName: string;
   authorImage: string;
-}
+};
 
-export interface FormInput {
+export type FormInput = {
   _id: string;
   name: string;
   email: string;
   comment: string;
-}
+};

@@ -5,28 +5,32 @@ import { CardProps } from "../typings";
 const Card = ({
   linkToPost,
   description,
-  mainImage,
+  thumbnail,
   postTitle,
   authorName,
   authorImage,
 }: CardProps) => {
+  
   return (
-    <div className="hover:scale-105 transition-all border rounded-lg overflow-hidden">
+    <div className="hover:scale-105 mx-auto md:mx-5 md:my-5 max-w-xs shadow-2xl transition-all border rounded-lg overflow-hidden">
       <Link href={linkToPost}>
         <a>
           <Image
             className="mx-auto object-cover w-full"
-            src={mainImage}
+            src={thumbnail}
             alt={postTitle}
-            width={418}
-            height={140}
+            width={350}
+            height={150}
           />
           <div className="flex p-5 justify-between">
             <div>
               <h3 className="font-bold">{postTitle}</h3>
-              <p className="text-sm">
-                {description} by {authorName}
-              </p>
+              <span>
+                <p className="text-sm">
+                  {description}
+                  <p className="font-bold">by {authorName}</p>
+                </p>
+              </span>
             </div>
             <span className="h-14 w-14 rounded-full">
               <Image
