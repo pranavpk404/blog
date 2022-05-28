@@ -10,7 +10,6 @@ const Card = ({
   authorName,
   authorImage,
 }: CardProps) => {
-  
   return (
     <div className="hover:scale-105 mx-auto md:mx-5 md:my-5 max-w-xs shadow-2xl transition-all border rounded-lg overflow-hidden">
       <Link href={linkToPost}>
@@ -26,10 +25,8 @@ const Card = ({
             <div>
               <h3 className="font-bold">{postTitle}</h3>
               <span>
-                <p className="text-sm">
-                  {description}
-                  <p className="font-bold">by {authorName}</p>
-                </p>
+                <p className="text-sm">{description}</p>
+                <p className="font-bold">by {authorName}</p>
               </span>
             </div>
             <span className="h-14 w-14 rounded-full">
