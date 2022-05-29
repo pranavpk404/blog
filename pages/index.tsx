@@ -16,7 +16,7 @@ const Home = ({ posts }: Props) => {
         <meta name="description" content="Blog By Pranav" />
         <link rel="icon" href="/logo.png" />
       </Head>
-      <main className="flex justify-evenly flex-col sm:flex-row">
+      <main className="flex flex-wrap jsustify-evenly flex-col sm:flex-row">
         {posts.map((post) => (
           <Card
             key={post._id}

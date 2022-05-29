@@ -11,7 +11,7 @@ const Card = ({
   authorImage,
 }: CardProps) => {
   return (
-    <div className="hover:scale-105 mx-auto md:mx-5 md:my-5 max-w-xs shadow-2xl transition-all border rounded-lg overflow-hidden">
+    <div className="hover:scale-105 mx-auto md:mx-5 my-5 max-w-xs shadow-2xl transition-all border rounded-lg overflow-hidden">
       <Link href={linkToPost}>
         <a>
           <Image
