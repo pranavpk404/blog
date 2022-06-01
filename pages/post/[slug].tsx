@@ -5,6 +5,7 @@ import { Post } from "../../typings";
 import CommentForm from "../../components/CommentForm";
 import Comments from "../../components/Comments";
 import { GetStaticProps } from "next/types";
+import Head from "next/head";
 
 type Props = {
   post: Post;
@@ -13,72 +14,78 @@ type Props = {
 const Post = ({ post }: Props) => {
   const { title, mainImage, author, _createdAt, comments, _id } = post;
   return (
-    <div>
-      <Image
-        width={1500}
-        height={500}
-        alt={post.title}
-        src={urlFor(mainImage.asset._ref).url()}
-      />
+    <>
+      <Head>
+        <title>Blog</title>
+        <meta name="description" content="Blog By Pranav" />
+        <link rel="icon" href="/logo.png" />
+      </Head>
+      <div>
+        <Image
+          width={1500}
+          height={500}
+          alt={post.title}
+          src={urlFor(mainImage.asset._ref).url()}
+        />
 
-      <article className="max-w-3xl mx-auto p-5">
-        <h1 className="text-3xl mb-3 ">{title}</h1>
-        <div className="flex items-center mt-2 space-x-5 mb-5">
-          <Image
-            width="48"
-            height="48"
-            className="rounded-full"
-            src={urlFor(author.image).url()!}
-            alt={author.name}
-          />
-          <p className="font-extralight text-sm">
-            Blog Post by {author.name} - Published at{" "}
-            {new Date(_createdAt).toLocaleString()}
-          </p>
-        </div>
-        <div>
-          <PortableText
-            className=""
-            serializers={{
-              h1: (props: any) => (
-                <h1 className="text-5xl mb-3">{props.children}</h1>
-              ),
-              h2: (props: any) => (
-                <h2 className="text-4xl mb-3">{props.children}</h2>
-              ),
-              h3: (props: any) => (
-                <h3 className="text-3xl mb-3">{props.children}</h3>
-              ),
-              h4: (props: any) => (
-                <h4 className="text-2xl mb-3">{props.children}</h4>
-              ),
-
-              link: (props: any) => (
-                <a className="text-base mb-3" href={props.href}>
-                  {props.children}
-                </a>
-              ),
-              a: (props: any) => (
-                <a className="mb-3 text-3xl" href={props.href}>
-                  {props.children}
-                </a>
-              ),
-              ul: (props: any) => <ul className="mt-xl">{props.children}</ul>,
-              ol: (props: any) => <ol className="mt-xl">{props.children}</ol>,
-              li: (props: any) => (
-                <li className="text-base mb-3 list-disc">{props.children}</li>
-              ),
-            }}
-            content={post.body}
-            projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
-            dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}
-          />
-        </div>
-      </article>
-      <hr className=" max-w-lg my-5 mx-auto border border-yellow-500" />
-      <CommentForm blogId={_id} />
-      <Comments comments={comments} />
-    </div>
+        <article className="max-w-3xl mx-auto p-5">
+          <h1 className="text-3xl mb-3 ">{title}</h1>
+          <div className="flex items-center mt-2 space-x-5 mb-5">
+            <Image
+              width="48"
+              height="48"
+              className="rounded-full"
+              src={urlFor(author.image).url()!}
+              alt={author.name}
+            />
+            <p className="font-extralight text-sm">
+              Blog Post by {author.name} - Published at{" "}
+              {new Date(_createdAt).toLocaleString()}
+            </p>
+          </div>
+          <div>
+            <PortableText
+              className=""
+              serializers={{
+                h1: (props: any) => (
+                  <h1 className="text-5xl mb-3">{props.children}</h1>
+                ),
+                h2: (props: any) => (
+                  <h2 className="text-4xl mb-3">{props.children}</h2>
+                ),
+                h3: (props: any) => (
+                  <h3 className="text-3xl mb-3">{props.children}</h3>
+                ),
+                h4: (props: any) => (
+                  <h4 className="text-2xl mb-3">{props.children}</h4>
+                ),
+                link: (props: any) => (
+                  <a className="text-base mb-3" href={props.href}>
+                    {props.children}
+                  </a>
+                ),
+                a: (props: any) => (
+                  <a className="mb-3 text-3xl" href={props.href}>
+                    {props.children}
+                  </a>
+                ),
+                ul: (props: any) => <ul className="mt-xl">{props.children}</ul>,
+                ol: (props: any) => <ol className="mt-xl">{props.children}</ol>,
+                li: (props: any) => (
+                  <li className="text-base mb-3 list-disc">{props.children}</li>
+                ),
+              }}
+              content={post.body}
+              projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
+              dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}
+            />
+          </div>
+        </article>
+        <hr className=" max-w-lg my-5 mx-auto border border-yellow-500" />
+        <CommentForm blogId={_id} />
+        <Comments comments={comments} />
+      </div>
+    </>
   );
 };
 
