@@ -16,7 +16,7 @@ const Post = ({ post }: Props) => {
   return (
     <>
       <Head>
-        <title>Blog</title>
+        <title>{title}</title>
         <meta name="description" content="Blog By Pranav" />
         <link rel="icon" href="/logo.png" />
       </Head>
